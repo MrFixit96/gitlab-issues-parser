@@ -1,16 +1,14 @@
-# gitlab-issues-parser
+# Project
 
-## Project
-
-### Gitlab Issue Log Parser
+Gitlab Issue Log Parser
 
 ## Author
 
-### James Anderton
+James Anderton
 
 ## Date
 
-### 12/08/2020
+12/08/2020
 
 ## Purpose
 
