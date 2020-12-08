@@ -23,11 +23,17 @@ if os.getenv('VAULT_TOKEN'):
 if os.getenv('GITLAB_TOKEN'):
     GITLAB_TOKEN = os.getenv('GITLAB_TOKEN')
 
+if os.getenv('PRINT_DEBUG'):
+    PRINT_DEBUG = os.getenv('PRINT_DEBUG')    
+
 BRANCH = os.getenv('BRANCH')
 
 # main route handler
 @app.route('/', methods=['POST'])
 def respond():
+    customer = {}
+
+    # Pull in request payload
     data = request.get_json()
 
     # Pull fields from the webhook's json payload
@@ -36,13 +42,16 @@ def respond():
     
     # Parse the description field for templated key:value pairs
     data = parse_description(desc)
-    print(data)
-    customer = {}
+    if PRINT_DEBUG:
+      print(data)
+    
     for item in data:
       if item:
         k,v = item[0].split(":")
         customer[k]=v
-        print(v)
+        
+        if PRINT_DEBUG:
+          print(v)
 
     NAMESLUG = customer['NAMESLUG']
     TEST_TEAM = customer['TEST_TEAM']
