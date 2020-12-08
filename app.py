@@ -56,13 +56,15 @@ def respond():
     req_payload = {'variables[NAMESLUG]': NAMESLUG, 'variables[TEST_TEAM]': TEST_TEAM, 'variables[PROD_TEAM]': PROD_TEAM, 'variables[NAMESPACE]': NAMESPACE, 'token': GITLAB_TOKEN, 'ref': BRANCH, 'variables[VAULT_TOKEN]': VAULT_TOKEN}
 
     # format data for sending via CLI as a curl so we can print out for the user what we are doing
-    curl_payload = "--form 'variables[NAMESLUG]'=" + str(NAMESLUG) + \
-        " --form 'variables[TEST_TEAM]'=" + str(TEST_TEAM) + \
-        " --form 'variables[PROD_TEAM]'=" + str(PROD_TEAM) + \
-        " --form 'variables[NAMESPACE]'=" + str(NAMESPACE) + \
-        " --form token='" + str(GITLAB_TOKEN) + \
-        "' --form ref='" + str(BRANCH) + \
-        "' --form 'variables[VAULT_TOKEN]'=" + str(VAULT_TOKEN)
+    curl_payload = (
+        f"--form 'variables[NAMESLUG]'={NAMESLUG}"
+        + f" --form 'variables[TEST_TEAM]'={TEST_TEAM}"
+        + f" --form 'variables[PROD_TEAM]'={PROD_TEAM}"
+        + f" --form 'variables[NAMESPACE]'={NAMESPACE}"
+        + f" --form 'token'={GITLAB_TOKEN}"
+        + f" --form 'ref'={BRANCH}"
+        + f" --form 'variables[VAULT_TOKEN]'={VAULT_TOKEN}"
+    )
      
     # Send a POST request to the already set up gitlab pipeline trigger
     req = requests.post('https://gitlab.com/api/v4/projects/' + str(project_id) + '/trigger/pipeline?', req_payload)
