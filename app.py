@@ -11,6 +11,8 @@ from flask import Flask, request, Response
 #   the object_attributes[description] field. In this field it will trigger on
 #   KEYWORD:Value pairs and separate them for use in a POST request. Finally
 #   It will print out the equivalent Curl request for debugging use.
+# CAVEAT: May need to parse json payload to lowercase False and switch None to
+#   null
 #
 #############################################
 app = Flask(__name__)
