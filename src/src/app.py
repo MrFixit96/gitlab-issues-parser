@@ -21,6 +21,8 @@ if not os.getenv("VAULT_TOKEN") or not os.getenv("GITLAB_TOKEN"):
 GITLAB_TOKEN = os.getenv("GITLAB_TOKEN")
 VAULT_TOKEN = os.getenv("VAULT_TOKEN")
 BRANCH = os.getenv("BRANCH", default="master")
+PORT = os.getenv("APP_PORT", default="3000")
+
 # main route handler
 @app.route("/", methods=["POST"])
 def respond():
@@ -91,4 +93,4 @@ def parse_description(description):
     return customer
 # Start up our app on port 3000
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+    app.run(host="0.0.0.0", port=PORT)
